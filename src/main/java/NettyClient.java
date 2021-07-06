@@ -20,7 +20,7 @@ public class NettyClient {
                         }
                     });
             System.out.println("netty client start");
-            ChannelFuture channelFuture = bootstrap.connect("0.0.0.0", 9000).sync();
+            ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 9000).sync();
             channelFuture.channel().closeFuture().sync();
         } finally {
             group.shutdownGracefully();
