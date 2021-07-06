@@ -12,15 +12,8 @@ import java.util.Scanner;
 
 public class ChatClient {
 
-    private final String host;
-    private final int port;
+    public static void main(String[] args) throws Exception {
 
-    public ChatClient(String host, int port) {
-        this.host = host;
-        this.port = port;
-    }
-
-    public void run() throws Exception {
         EventLoopGroup group = new NioEventLoopGroup();
         try {
             Bootstrap bootstrap = new Bootstrap()
@@ -39,7 +32,7 @@ public class ChatClient {
                         }
                     });
 
-            ChannelFuture channelFuture = bootstrap.connect(host, port).sync();
+            ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 9000).sync();
             // 得到channel
             Channel channel = channelFuture.channel();
             System.out.println("-------" + channel.localAddress() + "--------");
@@ -55,7 +48,4 @@ public class ChatClient {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        new ChatClient("127.0.0.1", 8989).run();
-    }
 }
